@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withOktaAuth } from '@okta/okta-react';
+import NavBar from '../../Components/NavBar'
 
 async function checkUser() {
   if (this.props.authState.isAuthenticated && !this.state.userInfo) {
@@ -15,19 +16,15 @@ export default withOktaAuth(class Dashboard extends Component {
     super(props);
     this.state = { userInfo: null };
     this.checkUser = checkUser.bind(this);
-    this.logout = this.logout.bind(this);
   }
 
-  async logout() {
-    this.props.authService.logout('/');
-  }
 
   async componentDidMount() {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: 'React POST Request Example' })
-    };
+    // const requestOptions = {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ title: 'React POST Request Example' })
+    // };
 
     this._isMounted = true;
     this.checkUser();
@@ -42,6 +39,7 @@ export default withOktaAuth(class Dashboard extends Component {
     console.log(this.state)
     return (
       <React.Fragment>
+        <NavBar />
         <div>
           {this.state.userInfo && (
             <div>
@@ -49,7 +47,6 @@ export default withOktaAuth(class Dashboard extends Component {
             </div>
           )}
         </div>
-        <button onClick={this.logout}>Logout</button>
       </React.Fragment>
     )
   }

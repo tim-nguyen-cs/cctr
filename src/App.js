@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { SecureRoute, Security, LoginCallback } from '@okta/okta-react';
-import Home from './Home';
-import Dashboard from './Dashboard';
+import Home from './Views/Home';
+import Dashboard from './Views/Dashboard';
 
 class App extends Component {
   render() {

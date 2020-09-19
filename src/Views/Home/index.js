@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { withOktaAuth } from '@okta/okta-react';
+
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
+
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
@@ -17,15 +14,13 @@ import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
 
+import NavBar from '../../Components/NavBar'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
     bottom: theme.spacing(2),
     right: theme.spacing(2),
-  },
-  large: {
-    width: theme.spacing(8),
-    height: theme.spacing(8),
   },
 }));
 
@@ -33,19 +28,7 @@ function returnTemplate(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar>
-        <Toolbar>
-          <Grid
-            container
-            justify="space-between"
-            alignItems="center"
-          >
-            <Avatar alt='Wheelchair Heart' src={require('../static/images/wheelchair_heart.png')} className={useStyles.large} />
-            <Typography variant="h4">DEBBY</Typography>
-            <Button variant="contained" size='small' onClick={props.login}><Typography variant="h4">Login</Typography></Button>
-          </Grid>
-        </Toolbar>
-      </AppBar>
+      <NavBar />
       <Toolbar id="back-to-top-anchor" />
       <Container>
         <Box my={2}>
@@ -107,15 +90,6 @@ ScrollTop.propTypes = {
 };
 
 export default withOktaAuth(class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.login = this.login.bind(this);
-  }
-
-  async login() {
-    this.props.authService.login('/');
-  }
-
   render() {
     if (this.props.authState.isPending) return <div>Loading...</div>;
     return this.props.authState.isAuthenticated ? <Redirect to="/dashboard" /> : returnTemplate(this)
