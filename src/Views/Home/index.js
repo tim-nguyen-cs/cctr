@@ -4,17 +4,24 @@ import { withOktaAuth } from '@okta/okta-react';
 
 import PropTypes from 'prop-types';
 
-import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Fab from '@material-ui/core/Fab';
+import Grid from '@material-ui/core/Grid';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Paper from '@material-ui/core/Paper'
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Zoom from '@material-ui/core/Zoom';
 
 import NavBar from '../../Components/NavBar'
+import { ReactComponent as Graphic } from '../../static/images/disability_graphic.svg';
+import { ReactComponent as Doctor } from '../../static/images/doctor.svg';
+import { ReactComponent as Yoga } from '../../static/images/yoga.svg';
+import { ReactComponent as No } from '../../static/images/no.svg';
 import './styles.scss'
 
 const useStyles = makeStyles((theme) => ({
@@ -28,23 +35,44 @@ const useStyles = makeStyles((theme) => ({
 function returnTemplate(props) {
   return (
     <React.Fragment>
-      <CssBaseline />
       <NavBar />
+      <CssBaseline />
       <Toolbar id='back-to-top-anchor' />
-      <Container>
-        <Box my={2}>
-          {[...new Array(12)]
-            .map(
-              () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-            )
-            .join('\n')}
-        </Box>
+      <Container className='container'>
+        <Paper className='header' elevation={4}>
+          <Grid container justify="space-evenly" alignItems="center">
+            <Grid container direction="column" justify="space-evenly" className='header-text'>
+              <Typography variant="h4" gutterBottom="true">Meet <span className='title'>Debbie</span>, your affordable, personalized, in-home physical therapist.</Typography>
+              <Typography variant="h6" gutterBottom="true">Perfect for remote physical therapy sessions. Personalized to the capabilities of your own body. Seamlessly integrated with your personal healthcare provider. </Typography>
+              <Grid container justify="space-around" alignItems="center">
+                <Button variant="contained" onClick={props.login} className="header-buttons">I am a patient</Button>
+                <Button variant="contained" onClick={props.login} className="header-buttons">I am a physician</Button>
+              </Grid>
+            </Grid>
+            <Graphic className="image" />
+          </Grid>
+        </Paper>
+        <Grid container justify="space-evenly">
+          <Paper className='card' elevation={4}>
+            <Yoga className='image' />
+            <Typography variant="h5" className="title">Personalized Therapy Treatments</Typography>
+            <Typography variant="h6">With it's sophisticated AI model, Debbie AI provides you with customizable treatment sessions based on your current disabilities and pre-existing conditions.</Typography>
+          </Paper>
+          <Paper className='card' elevation={4}>
+            <Doctor className='image' />
+            <Typography variant="h5" className="title">Healthcare Integration</Typography>
+            <Typography variant="h6">With built-in physician integration, doctors remain up-to-date with your recovery progression.</Typography>
+          </Paper>
+          <Paper className='card' elevation={4}>
+            <No className='image' />
+            <Typography variant="h5" className="title">Greater Affordability</Typography>
+            <Typography variant="h6">With no annual cost, Debbie AI provides a more accessible solution to physical therapy.</Typography>
+          </Paper>
+        </Grid>
       </Container>
+
       <ScrollTop {...props}>
-        <Fab color='secondary' size='small' aria-label='scroll back to top'>
+        <Fab className='scroll-to-top' size='small' aria-label='scroll back to top'>
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
@@ -91,6 +119,15 @@ ScrollTop.propTypes = {
 };
 
 export default withOktaAuth(class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.login = this.login.bind(this);
+  }
+
+  async login() {
+    this.props.authService.login('/');
+  }
+
   render() {
     if (this.props.authState.isPending) return <div>Loading...</div>;
     return this.props.authState.isAuthenticated ? <Redirect to='/dashboard' /> : returnTemplate(this)
