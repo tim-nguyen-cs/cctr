@@ -32,12 +32,12 @@ export default withOktaAuth(class Dashboard extends Component {
         <Toolbar>
           <Grid
             container
-            alignItems="center"
+            alignItems='center'
           >
             <Avatar alt='Wheelchair Heart' src={require('../../static/images/wheelchair_heart.png')} />
             <Typography className='title' variant='h2'>Debbie</Typography>
-            {this.props.authState.isAuthenticated ? <Button className='button' variant="outlined" size='small' onClick={this.logout}>Logout</Button>
-              : <Button className='button' variant="outlined" size='small' onClick={this.login}>Login</Button>
+            {this.props.authState.isAuthenticated ? <Button className='button' variant='outlined' size='small' onClick={this.logout}>Logout</Button>
+              : <Button className='button' variant='outlined' onClick={this.login}>Login</Button>
 }
           </Grid>
         </Toolbar>

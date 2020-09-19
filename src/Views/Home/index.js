@@ -30,7 +30,7 @@ function returnTemplate(props) {
     <React.Fragment>
       <CssBaseline />
       <NavBar />
-      <Toolbar id="back-to-top-anchor" />
+      <Toolbar id='back-to-top-anchor' />
       <Container>
         <Box my={2}>
           {[...new Array(12)]
@@ -44,7 +44,7 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
         </Box>
       </Container>
       <ScrollTop {...props}>
-        <Fab color="secondary" size="small" aria-label="scroll back to top">
+        <Fab color='secondary' size='small' aria-label='scroll back to top'>
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
@@ -74,7 +74,7 @@ function ScrollTop(props) {
 
   return (
     <Zoom in={trigger}>
-      <div onClick={handleClick} role="presentation" className={classes.root}>
+      <div onClick={handleClick} role='presentation' className={classes.root}>
         {children}
       </div>
     </Zoom>
@@ -93,6 +93,6 @@ ScrollTop.propTypes = {
 export default withOktaAuth(class Home extends Component {
   render() {
     if (this.props.authState.isPending) return <div>Loading...</div>;
-    return this.props.authState.isAuthenticated ? <Redirect to="/dashboard" /> : returnTemplate(this)
+    return this.props.authState.isAuthenticated ? <Redirect to='/dashboard' /> : returnTemplate(this)
   }
 });
