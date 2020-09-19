@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import { withOktaAuth } from '@okta/okta-react';
 
-class Dashboard extends Component {
-  render() {
-    return (
-      <div>This is a dashboard!</div>
-    );
+export default withOktaAuth(class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
   }
-}
 
-export default Dashboard;
+  async logout() {
+    this.props.authService.logout('/');
+  }
+
+  render() {
+    return <button onClick={this.logout}>Logout</button>
+  }
+});
