@@ -15,6 +15,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
 
 import NavBar from '../../Components/NavBar'
+import './styles.scss'
 
 const useStyles = makeStyles((theme) => ({
   root: {

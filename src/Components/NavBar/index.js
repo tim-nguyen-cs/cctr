@@ -5,17 +5,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    position: 'fixed',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-}));
+import './styles.scss'
+
 
 export default withOktaAuth(class Dashboard extends Component {
   constructor(props) {
@@ -25,7 +19,6 @@ export default withOktaAuth(class Dashboard extends Component {
   }
 
   async login() {
-    console.log('logging in!')
     this.props.authService.login('/');
   }
 
@@ -34,19 +27,17 @@ export default withOktaAuth(class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
-      <AppBar>
+      <AppBar className='nav-bar'>
         <Toolbar>
           <Grid
             container
-            justify="space-between"
             alignItems="center"
           >
-            <Avatar alt='Wheelchair Heart' src={require('../../static/images/wheelchair_heart.png')} className={useStyles.large} />
-            <Typography variant="h4">DEBBIE</Typography>
-            {this.props.authState.isAuthenticated ? <Button variant="contained" size='small' onClick={this.logout}><Typography variant="h4">Logout</Typography></Button>
- : <Button variant="contained" size='small' onClick={this.login}><Typography variant="h4">Login</Typography></Button>
+            <Avatar alt='Wheelchair Heart' src={require('../../static/images/wheelchair_heart.png')} />
+            <Typography className='title' variant='h2'>Debbie</Typography>
+            {this.props.authState.isAuthenticated ? <Button className='button' variant="outlined" size='small' onClick={this.logout}>Logout</Button>
+              : <Button className='button' variant="outlined" size='small' onClick={this.login}>Login</Button>
 }
           </Grid>
         </Toolbar>

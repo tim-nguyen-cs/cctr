@@ -1,0 +1,4 @@
+@font-face {
+  font-family: 'Quickers';
+  src: local('Quickers'), url('./static/fonts/Quickers.ttf') format('truetype')
+}
