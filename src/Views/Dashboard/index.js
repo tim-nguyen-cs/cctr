@@ -50,31 +50,6 @@ async function checkUser() {
   }
 }
 
-function createData(name, count) {
-  return { [name]: count};
-}
-
-const rows = [
-  createData('Crunches', Math.floor(Math.random() * Math.floor(30))),
-  createData('Tricep Dips', Math.floor(Math.random() * Math.floor(30))),
-  createData('Squat Jumps', Math.floor(Math.random() * Math.floor(30))),
-  createData('Leg Raises', Math.floor(Math.random() * Math.floor(30))),
-  createData('Oblique Twists', Math.floor(Math.random() * Math.floor(30))),
-];
-
-function createCollapseData(date, sentiment, was_injured) {
-  return {
-    date,
-    sentiment,
-    was_injured,
-    history: [
-      { type: 'Crunches', count: Math.floor(Math.random() * Math.floor(30)) },
-      { type: 'Squat Jumps', count: Math.floor(Math.random() * Math.floor(30)) },
-      { type: 'Oblique Twists', count: Math.floor(Math.random() * Math.floor(30)) },
-    ],
-  };
-}
-
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -120,19 +95,6 @@ function Row(props) {
   );
 }
 
-function randomDate(start, end) {
-  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-}
-
-const collapseRows = [
-  createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Good', 'Nope!'),
-  createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Okay', 'Yep.'),
-  createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Terrible', 'Yep.'),
-  createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Great', 'Nope!'),
-  createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Good', 'Nope!'),
-];
-
-
 function returnTemplate(props) {
   const history = createBrowserHistory({ forceRefresh: true })
   return (
@@ -161,7 +123,7 @@ function returnTemplate(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
+                  {props.state.exercises.map((row) => (
                     <TableRow key={row.name}>
                       <TableCell scope="row" align="center">{Object.keys(row)[0]}</TableCell>
                       <TableCell align="center">{Object.values(row)[0]}</TableCell>
@@ -184,7 +146,7 @@ function returnTemplate(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {collapseRows.map((row) => (
+                  {props.state.history.map((row) => (
                     <Row key={row.name} row={row} />
                   ))}
                 </TableBody>
@@ -252,11 +214,48 @@ export default withOktaAuth(class Dashboard extends Component {
   }
 
   async componentDidMount() {
+    function createData(name, count) {
+      return { [name]: count };
+    }
+
+    const rows = [
+      createData('Crunches', Math.floor(Math.random() * Math.floor(30))),
+      createData('Tricep Dips', Math.floor(Math.random() * Math.floor(30))),
+      createData('Squat Jumps', Math.floor(Math.random() * Math.floor(30))),
+      createData('Leg Raises', Math.floor(Math.random() * Math.floor(30))),
+      createData('Oblique Twists', Math.floor(Math.random() * Math.floor(30))),
+    ];
+
+    function createCollapseData(date, sentiment, was_injured) {
+      return {
+        date,
+        sentiment,
+        was_injured,
+        history: [
+          { type: 'Crunches', count: Math.floor(Math.random() * Math.floor(30)) },
+          { type: 'Squat Jumps', count: Math.floor(Math.random() * Math.floor(30)) },
+          { type: 'Oblique Twists', count: Math.floor(Math.random() * Math.floor(30)) },
+        ],
+      };
+    }
+
+    function randomDate(start, end) {
+      return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    }
+
+    const collapsedRows = [
+      createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Good', 'Nope!'),
+      createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Okay', 'Yep.'),
+      createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Terrible', 'Yep.'),
+      createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Great', 'Nope!'),
+      createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Good', 'Nope!'),
+    ];
+
     this._isMounted = true;
     this.checkUser();
     // var url = new URL("http://dummy.restapiexample.com/api/v1/employee/1")
     // fetch(url).then((response) => response.json()).then((data) => this.setState({ exercises: data }));
-    this.setState({exercises: {key: 1}})
+    this.setState({exercises: rows, history: collapsedRows})
   }
 
   async componentDidUpdate() {
