@@ -55,9 +55,9 @@ function createCollapseData(name, age, height, weight, disabilities) {
     weight,
     disabilities,
     history: [
-      { type: '2020-01-05', count: 11091700 },
-      { type: '2020-01-05', count: 11091700 },
-      { type: '2020-01-05', count: 11091700 },
+      { type: 'Crunches', count: Math.floor(Math.random() * Math.floor(30)) },
+      { type: 'Squat Jumps', count: Math.floor(Math.random() * Math.floor(30)) },
+      { type: 'Oblique Twists', count: Math.floor(Math.random() * Math.floor(30)) },
     ],
   };
 }
@@ -110,11 +110,10 @@ function Row(props) {
 }
 
 const collapseRows = [
-  createCollapseData('Frozen yoghurt', '25', '5 feet, 9 inches', '125lbs', 'N/A'),
-  createCollapseData('Frozen yoghurt', '25', '5 feet, 9 inches', '125lbs', 'N/A'),
-  createCollapseData('Frozen yoghurt', '25', '5 feet, 9 inches', '125lbs', 'N/A'),
-  createCollapseData('Frozen yoghurt', '25', '5 feet, 9 inches', '125lbs', 'N/A'),
-  createCollapseData('Frozen yoghurt', '25', '5 feet, 9 inches', '125lbs', 'N/A'),
+  createCollapseData('Timothy Nguyen', Math.floor(Math.random() * Math.floor(25)), '5 feet, 9 inches', Math.floor(Math.random() * Math.floor(150)) + 'lbs', 'N/A'),
+  createCollapseData('Claudia Lozano', Math.floor(Math.random() * Math.floor(25)), '5 feet, 9 inches', Math.floor(Math.random() * Math.floor(150)) + 'lbs', 'N/A'),
+  createCollapseData('Constanza Rodriguez', Math.floor(Math.random() * Math.floor(25)), '5 feet, 9 inches', Math.floor(Math.random() * Math.floor(150)) + 'lbs', 'N/A'),
+  createCollapseData('Richard Liu', Math.floor(Math.random() * Math.floor(25)), '5 feet, 9 inches', Math.floor(Math.random() * Math.floor(150)) + 'lbs', 'N/A'),
 ];
 
 function returnTemplate(props) {

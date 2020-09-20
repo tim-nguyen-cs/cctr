@@ -55,11 +55,11 @@ function createData(name, count) {
 }
 
 const rows = [
-  createData('Frozen yoghurt', 159),
-  createData('Ice cream sandwich', 237),
-  createData('Eclair', 262),
-  createData('Cupcake', 305),
-  createData('Gingerbread', 356),
+  createData('Crunches', Math.floor(Math.random() * Math.floor(30))),
+  createData('Tricep Dips', Math.floor(Math.random() * Math.floor(30))),
+  createData('Squat Jumps', Math.floor(Math.random() * Math.floor(30))),
+  createData('Leg Raises', Math.floor(Math.random() * Math.floor(30))),
+  createData('Oblique Twists', Math.floor(Math.random() * Math.floor(30))),
 ];
 
 function createCollapseData(date, sentiment, was_injured) {
@@ -68,9 +68,9 @@ function createCollapseData(date, sentiment, was_injured) {
     sentiment,
     was_injured,
     history: [
-      { type: '2020-01-05', count: 11091700 },
-      { type: '2020-01-05', count: 11091700 },
-      { type: '2020-01-05', count: 11091700 },
+      { type: 'Crunches', count: Math.floor(Math.random() * Math.floor(30)) },
+      { type: 'Squat Jumps', count: Math.floor(Math.random() * Math.floor(30)) },
+      { type: 'Oblique Twists', count: Math.floor(Math.random() * Math.floor(30)) },
     ],
   };
 }
@@ -120,12 +120,16 @@ function Row(props) {
   );
 }
 
+function randomDate(start, end) {
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
+
 const collapseRows = [
-  createCollapseData('Frozen yoghurt','Good', 'Nope!'),
-  createCollapseData('Ice cream sandwich', 'Okay', 'Yep.'),
-  createCollapseData('Eclair', 'Terrible', 'Yep.'),
-  createCollapseData('Cupcake', 'Great', 'Nope!'),
-  createCollapseData('Gingerbread', 'Good', 'Nope!'),
+  createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Good', 'Nope!'),
+  createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Okay', 'Yep.'),
+  createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Terrible', 'Yep.'),
+  createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Great', 'Nope!'),
+  createCollapseData(randomDate(new Date(2020, 0, 1), new Date()).toUTCString(), 'Good', 'Nope!'),
 ];
 
 
@@ -146,7 +150,7 @@ function returnTemplate(props) {
           <Paper className='next-exercise' elevation={4}>
             <Grid container justify="space-between" alignItems="baseline">
               <Typography variant="h4" className='header-text'>Your Next Exercise:</Typography>
-              <Button variant="outlined" size="small" onClick={() => history.push('/view-workout')}  className="header-button">Start Workout</Button>
+              <Button variant="outlined" size="small" onClick={() => history.push('/view-workout')}  className="header-button">Start Session</Button>
             </ Grid>
             <TableContainer component={Paper}>
               <Table>
