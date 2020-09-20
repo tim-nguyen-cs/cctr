@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { createBrowserHistory as history } from 'history';
 import { withOktaAuth } from '@okta/okta-react';
 
 import PropTypes from 'prop-types';
@@ -8,13 +7,11 @@ import GridLoader from "react-spinners/GridLoader";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Fab from '@material-ui/core/Fab';
-import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -50,23 +47,13 @@ async function checkUser() {
   }
 }
 
-function createData(name, count) {
-  return { [name]: count};
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159),
-  createData('Ice cream sandwich', 237),
-  createData('Eclair', 262),
-  createData('Cupcake', 305),
-  createData('Gingerbread', 356),
-];
-
-function createCollapseData(date, sentiment, was_injured) {
+function createCollapseData(name, age, height, weight, disabilities) {
   return {
-    date,
-    sentiment,
-    was_injured,
+    name,
+    age,
+    height,
+    weight,
+    disabilities,
     history: [
       { type: '2020-01-05', count: 11091700 },
       { type: '2020-01-05', count: 11091700 },
@@ -87,9 +74,11 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row" align="center">{row.date}</TableCell>
-        <TableCell align="center">{row.sentiment}</TableCell>
-        <TableCell align="center">{row.was_injured}</TableCell>
+        <TableCell component="th" scope="row" align="center">{row.name}</TableCell>
+        <TableCell align="center">{row.age}</TableCell>
+        <TableCell align="center">{row.height}</TableCell>
+        <TableCell align="center">{row.weight}</TableCell>
+        <TableCell align="center">{row.disabilities}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -121,13 +110,12 @@ function Row(props) {
 }
 
 const collapseRows = [
-  createCollapseData('Frozen yoghurt','Good', 'Nope!'),
-  createCollapseData('Ice cream sandwich', 'Okay', 'Yep.'),
-  createCollapseData('Eclair', 'Terrible', 'Yep.'),
-  createCollapseData('Cupcake', 'Great', 'Nope!'),
-  createCollapseData('Gingerbread', 'Good', 'Nope!'),
+  createCollapseData('Frozen yoghurt', '25', '5 feet, 9 inches', '125lbs', 'N/A'),
+  createCollapseData('Frozen yoghurt', '25', '5 feet, 9 inches', '125lbs', 'N/A'),
+  createCollapseData('Frozen yoghurt', '25', '5 feet, 9 inches', '125lbs', 'N/A'),
+  createCollapseData('Frozen yoghurt', '25', '5 feet, 9 inches', '125lbs', 'N/A'),
+  createCollapseData('Frozen yoghurt', '25', '5 feet, 9 inches', '125lbs', 'N/A'),
 ];
-
 
 function returnTemplate(props) {
   return (
@@ -135,58 +123,34 @@ function returnTemplate(props) {
       <NavBar />
       <CssBaseline />
       <Toolbar id='back-to-top-anchor' />
-      <Container className='dashboard'>
+      <Container className='admin-dashboard'>
         <Paper className='header' elevation={4}>
-          {props.state.userInfo && (<Typography variant="h4" className='header-text' gutterBottom="true">Welcome back, {props.state.userInfo.given_name}!</Typography>)}
-          <Typography variant="subtitle1" className='header-text'>You're one step closer to being on the path of self improvement <span role="img" aria-label="Smiley Face">😊</span></Typography>
+          {props.state.userInfo && (<Typography variant="h4" className='header-text' gutterBottom="true">Welcome back, Dr. {props.state.userInfo.given_name}!</Typography>)}
+          <Typography variant="subtitle1" className='header-text'>Use the modules below to monitor and interact with your patients!</Typography>
         </Paper>
         <Divider />
-        <Grid container justify="space-between" alignItems="flex-start">
-          <Paper className='next-exercise' elevation={4}>
-            <Grid container justify="space-between" alignItems="baseline">
-              <Typography variant="h4" className='header-text'>Your Next Exercise:</Typography>
-              <Button variant="outlined" size="small" onClick={() => history().push('/view-workout')}  className="header-button">Start Workout</Button>
-            </ Grid>
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="center" className="table-header">Exercise Type</TableCell>
-                    <TableCell align="center" className="table-header">Duration/Repetition</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <TableRow key={row.name}>
-                      <TableCell scope="row" align="center">{Object.keys(row)[0]}</TableCell>
-                      <TableCell align="center">{Object.values(row)[0]}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
-          <Paper className='previous-exercise' elevation={4}>
-            <Typography variant="h4" className='header-text'>Your Previous Exercises:</Typography>
-            <TableContainer component={Paper}>
-              <Table aria-label="collapsible table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell />
-                    <TableCell align="center" className="table-header">Date</TableCell>
-                    <TableCell align="center" className="table-header">Sentiment</TableCell>
-                    <TableCell align="center" className="table-header">Injured?</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {collapseRows.map((row) => (
-                    <Row key={row.name} row={row} />
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
-        </Grid>
+        <Paper className='patient-list' elevation={4}>
+          <Typography variant="h4" className='header-text'>Your Previous Exercises:</Typography>
+          <TableContainer component={Paper}>
+            <Table aria-label="collapsible table">
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  <TableCell align="center" className="table-header">Name</TableCell>
+                  <TableCell align="center" className="table-header">Age</TableCell>
+                  <TableCell align="center" className="table-header">Height</TableCell>
+                  <TableCell align="center" className="table-header">Weight</TableCell>
+                  <TableCell align="center" className="table-header">Disabilities</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {collapseRows.map((row) => (
+                  <Row key={row.name} row={row} />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
       </Container>
 
       <ScrollTop {...props}>
@@ -247,11 +211,15 @@ export default withOktaAuth(class Dashboard extends Component {
   }
 
   async componentDidMount() {
+    // const requestOptions = {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ title: 'React POST Request Example' })
+    // };
+
     this._isMounted = true;
     this.checkUser();
-    // var url = new URL("http://dummy.restapiexample.com/api/v1/employee/1")
-    // fetch(url).then((response) => response.json()).then((data) => this.setState({ exercises: data }));
-    this.setState({exercises: {key: 1}})
+    fetch('https://api.github.com/users/hacktivist123').then((response) => response.json()).then((data) => this.setState({ exercises: data }));
   }
 
   async componentDidUpdate() {

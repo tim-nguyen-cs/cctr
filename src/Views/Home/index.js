@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { createBrowserHistory as history } from 'history';
 import { withOktaAuth } from '@okta/okta-react';
 
 import PropTypes from 'prop-types';
@@ -47,7 +48,7 @@ function returnTemplate(props) {
               <Typography variant="h6" gutterBottom="true">Perfect for remote physical therapy sessions. Personalized to the capabilities of your own body. Seamlessly integrated with your personal healthcare provider. </Typography>
               <Grid container justify="space-around" alignItems="center">
                 <Button variant="contained" onClick={props.login} className="header-buttons">I am a patient</Button>
-                <Button variant="contained" onClick={props.login} className="header-buttons">I am a physician</Button>
+                <Button variant="contained" onClick={() => history().push('/admin-dashboard')} className="header-buttons">I am a physician</Button>
               </Grid>
             </Grid>
             <Graphic className="image" />
@@ -123,9 +124,14 @@ export default withOktaAuth(class Home extends Component {
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
+    this.physicianLogin = this.physicianLogin.bind(this);
   }
 
   async login() {
+    this.props.authService.login('/');
+  }
+
+  async physicianLogin() {
     this.props.authService.login('/');
   }
 
@@ -133,7 +139,7 @@ export default withOktaAuth(class Home extends Component {
     const style = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" };
 
     if (this.props.authState.isPending)
-      return <div style={style}><GridLoader size={75} color={"#3F9899"}/></div>
+      return <div style={style}><GridLoader size={65} color={"#3F9899"}/></div>
     return this.props.authState.isAuthenticated ? <Redirect to='/dashboard' /> : returnTemplate(this)
   }
 });

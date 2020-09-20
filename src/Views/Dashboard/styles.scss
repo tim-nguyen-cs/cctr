@@ -1,0 +1,43 @@
+
+#root {
+  .dashboard {
+    background-color: #CFE5FF;
+    max-width: inherit;
+    max-height: inherit;
+    padding: 24px;
+    .header {
+      background-color: white;
+      border-radius: 20px;
+      width: fit-content;
+      margin: 7vh;
+      padding: 10px 35px;
+      .header-text {
+        margin-right: 50px;
+      }
+    }
+    .next-exercise, .previous-exercise {
+      background-color: white;
+      border-radius: 20px;
+      width: 45%;
+      margin: 4vh;
+      padding: 20px 35px;
+      .header-text {
+        font-weight: bold;
+        text-decoration: underline;
+        margin-bottom: 15px;
+      }
+      .table-header {
+        font-weight: bold;
+        font-style: italic;
+        font-size: 1.2rem;
+      }
+      .header-button {
+        background-color: #FFDBF4;
+      }
+    }
+  }
+  .scroll-to-top {
+    background-color: black;
+    color: white;
+  }
+}
