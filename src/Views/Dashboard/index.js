@@ -105,7 +105,8 @@ function returnTemplate(props) {
       <Container className='dashboard'>
         <Paper className='header' elevation={4}>
           {props.state.userInfo && (<Typography variant="h4" className='header-text' gutterBottom>Welcome back, {props.state.userInfo.given_name}!</Typography>)}
-          <Typography variant="subtitle1" className='header-text'>You're one step closer to being on the path of self improvement <span role="img" aria-label="Smiley Face">😊</span></Typography>
+          <Typography variant="subtitle1" className='header-text' gutterBottom>You're one step closer to being on the path of self improvement <span role="img" aria-label="Smiley Face">😊</span></Typography>
+          <Button variant="contained" color="primary" onClick={() => history.push('/onboarding')}>Take Fitness Quiz</Button>
         </Paper>
         <Divider />
         <Grid container justify="space-between" alignItems="flex-start">
@@ -272,7 +273,6 @@ export default withOktaAuth(class Dashboard extends Component {
   componentWillUnmount() {
     this._isMounted = false;
   }
-
 
   render() {
     const style = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" };

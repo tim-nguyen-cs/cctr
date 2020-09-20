@@ -4,6 +4,7 @@ import { SecureRoute, Security, LoginCallback } from '@okta/okta-react';
 import Home from './Views/Home';
 import Dashboard from './Views/Dashboard';
 import AdminDashboard from './Views/AdminDashboard';
+import Survey from './Views/Survey';
 import ViewWorkout from './Views/ViewWorkout';
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
           <SecureRoute path='/dashboard' component={Dashboard} />
           <SecureRoute path='/view-workout' component={ViewWorkout} />
           {/* <SecureRoute path='/admin-dashboard' component={AdminDashboard} /> */}
+          <SecureRoute path='/onboarding' component={Survey} />
           <Route path='/admin-dashboard' component={AdminDashboard} />
           <Route path='/implicit/callback' component={LoginCallback} />
         </Security>

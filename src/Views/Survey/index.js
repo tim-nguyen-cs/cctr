@@ -1,11 +1,16 @@
 import React from 'react';
+import { createBrowserHistory } from 'history';
 import { useForm } from 'react-hook-form';
 
-export default function App() {
+export default function Survey() {
+  const history = createBrowserHistory({ forceRefresh: true })
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {
+    console.log(data);
+    history.push('/dashboard')
+  }
   console.log(errors);
-  
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <input type="text" placeholder="First name" name="First name" ref={register({required: true, maxLength: 80})} />
@@ -14,17 +19,20 @@ export default function App() {
       <input type="number" placeholder="Age" name="Age" ref={register} />
       <input type="number" placeholder="Height" name="Height" ref={register} />
       <input type="number" placeholder="Weight" name="Weight" ref={register} />
+
       <select name="Gender" ref={register}>
         <option value="Female">Female</option>
         <option value=" Male"> Male</option>
         <option value=" Non-Binary"> Non-Binary</option>
         <option value=" Other"> Other</option>
       </select>
+
       <select name="Disability" ref={register}>
         <option value="Arthritis">Arthritis</option>
         <option value=" ALS"> ALS</option>
         <option value=" Other"> Other</option>
       </select>
+
       <p>Points to Avoid</p>
       <input type="number" placeholder="Number of Push-Ups" name="Number of Push-Ups" ref={register} />
       <input type="number" placeholder="Number of Sit-Ups" name="Number of Sit-Ups" ref={register} />
@@ -37,4 +45,3 @@ export default function App() {
     </form>
   );
 }
-
