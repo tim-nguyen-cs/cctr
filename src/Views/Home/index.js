@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { withOktaAuth } from '@okta/okta-react';
 
 import PropTypes from 'prop-types';
+import GridLoader from "react-spinners/GridLoader";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -129,7 +130,10 @@ export default withOktaAuth(class Home extends Component {
   }
 
   render() {
-    if (this.props.authState.isPending) return <div>Loading...</div>;
+    const style = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" };
+
+    if (this.props.authState.isPending)
+      return <div style={style}><GridLoader size={75} color={"#3F9899"}/></div>
     return this.props.authState.isAuthenticated ? <Redirect to='/dashboard' /> : returnTemplate(this)
   }
 });
