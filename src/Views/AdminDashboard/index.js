@@ -124,7 +124,7 @@ function returnTemplate(props) {
       <Toolbar id='back-to-top-anchor' />
       <Container className='admin-dashboard'>
         <Paper className='header' elevation={4}>
-          {props.state.userInfo && (<Typography variant="h4" className='header-text' gutterBottom="true">Welcome back, Dr. {props.state.userInfo.given_name}!</Typography>)}
+          {props.state.userInfo && (<Typography variant="h4" className='header-text' gutterBottom>Welcome back, Dr. {props.state.userInfo.given_name}!</Typography>)}
           <Typography variant="subtitle1" className='header-text'>Use the modules below to monitor and interact with your patients!</Typography>
         </Paper>
         <Divider />

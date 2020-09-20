@@ -43,8 +43,8 @@ async function checkUser() {
 function Item(props) {
   return (
     <Paper>
-      <Typography variant="h4" gutterBottom="true"><b>{props.item.name}</b></Typography>
-      <Typography variant="subtitle1" gutterBottom="true">{props.item.description}</Typography>
+      <Typography variant="h4" gutterBottom><b>{props.item.name}</b></Typography>
+      <Typography variant="subtitle1" gutterBottom>{props.item.description}</Typography>
       <Grid container justify="center">
         <img src={props.item.image} alt="workout" className="image"/>
       </Grid>
@@ -62,10 +62,13 @@ function returnTemplate(props) {
       <Container className='workout-view'>
         <Paper className='header' elevation={4}>
           <Grid container justify="space-between">
-            <Typography variant="h6" gutterBottom="true"><u>Here's your workout! Keep it up!</u></Typography>
+            <Typography variant="h6" gutterBottom><u>Here's your workout! Keep it up!</u></Typography>
             <Button className='finish' variant='outlined' onClick={() => history.push('/dashboard')}>Finish Session</Button>
           </Grid>
           <Carousel autoPlay="false" animation="slide" interval="10000">{props.state.exercises.map((item, i) => <Item key={i} item={item} />)}</Carousel>
+          <Grid container justify="flex-end">
+            <Button className="SOS" variant='contained' color="secondary" onClick={props.sendSMS}>I'm in Trouble!</Button>
+          </Grid>
         </Paper>
       </Container>
       <ScrollTop {...props}>
@@ -163,6 +166,10 @@ export default withOktaAuth(class ViewWorkout extends Component {
 
   componentWillUnmount() {
     this._isMounted = false;
+  }
+
+  sendSMS() {
+    console.log('Sending SMS!')
   }
 
 

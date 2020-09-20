@@ -45,8 +45,8 @@ function returnTemplate(props) {
         <Paper className='header' elevation={4}>
           <Grid container justify="space-evenly" alignItems="center">
             <Grid container direction="column" justify="space-evenly" className='header-text'>
-              <Typography variant="h4" gutterBottom="true">Meet <span className='title'>Debbie</span>, your affordable, personalized, in-home physical therapist.</Typography>
-              <Typography variant="h6" gutterBottom="true">Perfect for remote physical therapy sessions. Personalized to the capabilities of your own body. Seamlessly integrated with your personal healthcare provider. </Typography>
+              <Typography variant="h4" gutterBottom>Meet <span className='title'>Debbie</span>, your affordable, personalized, in-home physical therapist.</Typography>
+              <Typography variant="h6" gutterBottom>Perfect for remote physical therapy sessions. Personalized to the capabilities of your own body. Seamlessly integrated with your personal healthcare provider. </Typography>
               <Grid container justify="space-around" alignItems="center">
                 <Button variant="contained" onClick={props.login} className="header-buttons">I am a patient</Button>
                 <Button variant="contained" onClick={() => history.push('/admin-dashboard')} className="header-buttons">I am a physician</Button>

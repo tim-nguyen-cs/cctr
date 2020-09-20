@@ -104,7 +104,7 @@ function returnTemplate(props) {
       <Toolbar id='back-to-top-anchor' />
       <Container className='dashboard'>
         <Paper className='header' elevation={4}>
-          {props.state.userInfo && (<Typography variant="h4" className='header-text' gutterBottom="true">Welcome back, {props.state.userInfo.given_name}!</Typography>)}
+          {props.state.userInfo && (<Typography variant="h4" className='header-text' gutterBottom>Welcome back, {props.state.userInfo.given_name}!</Typography>)}
           <Typography variant="subtitle1" className='header-text'>You're one step closer to being on the path of self improvement <span role="img" aria-label="Smiley Face">😊</span></Typography>
         </Paper>
         <Divider />
@@ -252,9 +252,15 @@ export default withOktaAuth(class Dashboard extends Component {
     ];
 
     this._isMounted = true;
-    this.checkUser();
-    // var url = new URL("http://dummy.restapiexample.com/api/v1/employee/1")
-    // fetch(url).then((response) => response.json()).then((data) => this.setState({ exercises: data }));
+    await this.checkUser();
+    // fetch("https://cctr-app.herokuapp.com/user", { 'used_id': this.state.userInfo.sub, }).then((response) => response.json()).then((data) => {
+    //   if (Object.keys(data).length === 0)
+    //     this.setState({exercises: {}})
+    //   else
+    //     fetch("https://cctr-app.herokuapp.com/workout", { 'used_id': this.state.userInfo.sub }).then((response) => response.json()).then((data) => {
+    //       this.setState({ exercises: data })
+    //     })
+    // })
     this.setState({exercises: rows, history: collapsedRows})
   }
 
