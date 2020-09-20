@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import { createBrowserHistory as history } from 'history';
 import { withOktaAuth } from '@okta/okta-react';
 
 import PropTypes from 'prop-types';
@@ -8,22 +6,11 @@ import GridLoader from "react-spinners/GridLoader";
 
 
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
 import Fab from '@material-ui/core/Fab';
-import Grid from '@material-ui/core/Grid';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Paper from '@material-ui/core/Paper'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Zoom from '@material-ui/core/Zoom';
 
@@ -46,18 +33,6 @@ async function checkUser() {
     }
   }
 }
-
-function createData(name, count) {
-  return { name, count };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159),
-  createData('Ice cream sandwich', 237),
-  createData('Eclair', 262),
-  createData('Cupcake', 305),
-  createData('Gingerbread', 356),
-];
 
 function returnTemplate(props) {
   return (

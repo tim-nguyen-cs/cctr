@@ -130,7 +130,7 @@ function returnTemplate(props) {
         </Paper>
         <Divider />
         <Paper className='patient-list' elevation={4}>
-          <Typography variant="h4" className='header-text'>Your Previous Exercises:</Typography>
+          <Typography variant="h4" className='header-text'>Your Patients:</Typography>
           <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
               <TableHead>

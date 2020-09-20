@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { createBrowserHistory as history } from 'history';
+import { createBrowserHistory } from 'history';
 import { withOktaAuth } from '@okta/okta-react';
 
 import PropTypes from 'prop-types';
@@ -130,6 +130,7 @@ const collapseRows = [
 
 
 function returnTemplate(props) {
+  const history = createBrowserHistory({ forceRefresh: true })
   return (
     <React.Fragment>
       <NavBar />
@@ -145,7 +146,7 @@ function returnTemplate(props) {
           <Paper className='next-exercise' elevation={4}>
             <Grid container justify="space-between" alignItems="baseline">
               <Typography variant="h4" className='header-text'>Your Next Exercise:</Typography>
-              <Button variant="outlined" size="small" onClick={() => history().push('/view-workout')}  className="header-button">Start Workout</Button>
+              <Button variant="outlined" size="small" onClick={() => history.push('/view-workout')}  className="header-button">Start Workout</Button>
             </ Grid>
             <TableContainer component={Paper}>
               <Table>

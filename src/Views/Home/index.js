@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { createBrowserHistory as history } from 'history';
+import { createBrowserHistory } from 'history';
 import { withOktaAuth } from '@okta/okta-react';
 
 import PropTypes from 'prop-types';
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function returnTemplate(props) {
+  const history = createBrowserHistory({ forceRefresh: true })
   return (
     <React.Fragment>
       <NavBar />
@@ -48,7 +49,7 @@ function returnTemplate(props) {
               <Typography variant="h6" gutterBottom="true">Perfect for remote physical therapy sessions. Personalized to the capabilities of your own body. Seamlessly integrated with your personal healthcare provider. </Typography>
               <Grid container justify="space-around" alignItems="center">
                 <Button variant="contained" onClick={props.login} className="header-buttons">I am a patient</Button>
-                <Button variant="contained" onClick={() => history().push('/admin-dashboard')} className="header-buttons">I am a physician</Button>
+                <Button variant="contained" onClick={() => history.push('/admin-dashboard')} className="header-buttons">I am a physician</Button>
               </Grid>
             </Grid>
             <Graphic className="image" />
