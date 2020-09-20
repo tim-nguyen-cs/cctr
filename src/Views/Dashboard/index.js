@@ -105,7 +105,7 @@ function returnTemplate(props) {
       <Container className='dashboard'>
         <Paper className='header' elevation={4}>
           {props.state.userInfo && (<Typography variant="h4" className='header-text' gutterBottom>Welcome back, {props.state.userInfo.given_name}!</Typography>)}
-          <Typography variant="subtitle1" className='header-text' gutterBottom>You're one step closer to being on the path of self improvement <span role="img" aria-label="Smiley Face">😊</span></Typography>
+          <Typography variant="subtitle1" className='header-text' gutt>You're one step closer to being on the path of self improvement <span role="img" aria-label="Smiley Face">😊</span></Typography>
           <Button variant="contained" color="primary" onClick={() => history.push('/onboarding')}>Take Fitness Quiz</Button>
         </Paper>
         <Divider />
@@ -126,8 +126,8 @@ function returnTemplate(props) {
                 <TableBody>
                   {props.state.exercises.map((row) => (
                     <TableRow key={row.name}>
-                      <TableCell scope="row" align="center">{Object.keys(row)[0]}</TableCell>
-                      <TableCell align="center">{Object.values(row)[0]}</TableCell>
+                      <TableCell scope="row" align="center">{row[0]}</TableCell>
+                      <TableCell align="center">{row[1]}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -215,17 +215,7 @@ export default withOktaAuth(class Dashboard extends Component {
   }
 
   async componentDidMount() {
-    function createData(name, count) {
-      return { [name]: count };
-    }
-
-    const rows = [
-      createData('Crunches', Math.floor(Math.random() * Math.floor(30))),
-      createData('Tricep Dips', Math.floor(Math.random() * Math.floor(30))),
-      createData('Squat Jumps', Math.floor(Math.random() * Math.floor(30))),
-      createData('Leg Raises', Math.floor(Math.random() * Math.floor(30))),
-      createData('Oblique Twists', Math.floor(Math.random() * Math.floor(30))),
-    ];
+    const rows = { "yoga": "10 minutes", "tai chi": "10 minutes", "walking": "10 minutes", "biking": "10 minutes", "swimming": "10 minutes", "elliptical": "10 minutes", "weight machines": ' 3 sets of 6', "resistance bands": "10 minutes", "arm circles": ' 3 sets of 6', "arm stretch": "10 minutes", "hip stretch": "10 minutes", "sit ups": ' 3 sets of 6', "leg raises": "10 minutes", "calf raises": "10 minutes" }
 
     function createCollapseData(date, sentiment, was_injured) {
       return {
@@ -262,7 +252,7 @@ export default withOktaAuth(class Dashboard extends Component {
     //       this.setState({ exercises: data })
     //     })
     // })
-    this.setState({exercises: rows, history: collapsedRows})
+    this.setState({exercises: Object.entries(rows), history: collapsedRows})
   }
 
   async componentDidUpdate() {
