@@ -1,0 +1,58 @@
+
+#root {
+  .container {
+    background-color: #cfffe5;
+    max-width: inherit;
+    max-height: inherit;
+    padding: 24px;
+    .header {
+      background-color: white;
+      border-radius: 35px;
+      width: 85%;
+      margin: 7vh auto;
+      padding: 10px 35px;
+      .header-text {
+        width: 50%;
+        .title {
+          font-family: 'Quickers';
+          font-weight: bold;
+          font-size: 3.5rem;
+        }
+        .header-buttons {
+          margin-top: 10px;
+          border: solid black thin;
+          &:first-child {
+            background-color:#CFE5FF;
+          }
+          &:last-child {
+            background-color: #FFDBF4;
+          }
+        }
+      }
+      .image {
+        height: 100%;
+        width: 50%;
+      }
+    }
+    .card {
+      width: 300px;
+      height: 475px;
+      padding: 25px;
+      border-radius: 25px;
+      text-align: center;
+      .image {
+        height: 30%;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+      .title {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .scroll-to-top {
+    background-color: black;
+    color: white;
+  }
+}

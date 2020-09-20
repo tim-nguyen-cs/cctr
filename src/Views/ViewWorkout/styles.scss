@@ -1,0 +1,26 @@
+
+#root {
+  .workout-view {
+    background-color: #cfffe5;
+    max-width: inherit;
+    padding: 2vw;
+    .header {
+      background-color: white;
+      border-radius: 35px;
+      width: 95%;
+      margin: 3vh auto;
+      padding: 10px 35px;
+      .image {
+        height: 250px;
+        margin-bottom: 20px;
+      }
+      .button {
+        font-family: 'Arial Black';
+      }
+    }
+  }
+  .scroll-to-top {
+    background-color: black;
+    color: white;
+  }
+}
